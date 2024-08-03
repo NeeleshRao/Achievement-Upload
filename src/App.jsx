@@ -6,10 +6,9 @@ function App() {
   return (
     <>
     <Routes>
-      <Route path=""></Route>
+      <Route path='/' element={<Home/>}/>
+      <Route path='/file' element={<FileUpload/>}/>
     </Routes>
-      <Home />
-      <FileUpload />
     </>
   );
 }
