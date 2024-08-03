@@ -1,6 +1,6 @@
 import React from "react";
 import { useRef } from "react";
-import { firestore } from "../firebase";
+import { firestore } from "../../firebase";
 import { addDoc, collection } from "firebase/firestore";
 
 function Home() {
