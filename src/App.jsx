@@ -1,10 +1,11 @@
-import "./App.css";
+import FileUpload from "./FileUpload";
 import Home from "./Home";
 
 function App() {
   return (
     <>
       <Home />
+      <FileUpload />
     </>
   );
 }
