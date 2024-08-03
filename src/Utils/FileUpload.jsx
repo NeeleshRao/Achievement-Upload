@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { storage } from "./firebase";
+import { storage } from "../firebase";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 
 const FileUpload = () => {

@@ -1,5 +1,5 @@
-import FileUpload from "./FileUpload";
-import Home from "./Home";
+import FileUpload from "./Utils/FileUpload";
+import Home from "./Pages/Home";
 
 function App() {
   return (
