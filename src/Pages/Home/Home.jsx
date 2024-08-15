@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useRef } from "react";
 import { firestore } from "../../firebase";
 import { addDoc, collection } from "firebase/firestore";
-import { useAuth } from "../../context/AuthContext";
+import { useAuth } from "../../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 function Home() {
@@ -41,6 +41,7 @@ function Home() {
   return (
     <div>
       <h1>{user?.displayName}</h1>
+      {user.photoURL && <img src={user?.photoURL} className="w-10 rounded-full"></img>}
       <form onSubmit={handleSave}>
         <label>Enter Message</label>
         <input type="text" ref={messageRef} />

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useAuth } from "../../context/AuthContext";
+import { useAuth } from "../../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 export default function Login() {
@@ -16,14 +16,15 @@ export default function Login() {
 
   useEffect(() => {
     console.log(user);
-    if (user != null) navigate("/home");
+    // if (user != null) navigate("/home");
+    if (user != null) navigate("/internship");
   }, [user]);
 
   return (
     <div>
       <button
         onClick={handleLogin}
-        class="px-5 py-4 text-center font-semibold text-1xl text-white transition duration-500 ease-in-out transform bg-blue-600 lg:px-10  hover:bg-blue-700 focus:outline-none min-w-80"
+        className="px-5 py-4 text-center font-semibold text-1xl text-white transition duration-500 ease-in-out transform bg-blue-600 lg:px-10  hover:bg-blue-700 focus:outline-none min-w-80"
       >
         Log in
       </button>

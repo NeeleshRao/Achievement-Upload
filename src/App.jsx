@@ -3,6 +3,7 @@ import Home from "./Pages/Home/Home";
 import { Route, Routes } from "react-router-dom";
 import Login from "./Pages/Login/Login";
 import Protected from "./Utils/Protected";
+import Internship from "./Pages/Internship/Internship";
 
 function App() {
   return (
@@ -14,6 +15,14 @@ function App() {
           element={
             <Protected>
               <Home />
+            </Protected>
+          }
+        />
+        <Route
+          path="/internship"
+          element={
+            <Protected>
+              <Internship/>
             </Protected>
           }
         />
