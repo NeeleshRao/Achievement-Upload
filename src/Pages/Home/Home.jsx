@@ -11,11 +11,11 @@ function Home() {
   const navigate=useNavigate();
   const {logOut,user}=useAuth();
 
-  useEffect(()=>{
-    console.log("user",user)
-    // if(user)
-    //   navigate('/')
-  },[user])
+  // useEffect(()=>{
+  //   console.log("user",user)
+  //   // if(user)
+  //   //   navigate('/')
+  // },[user])
 
   const handleSave = async (e) => {
     e.preventDefault();

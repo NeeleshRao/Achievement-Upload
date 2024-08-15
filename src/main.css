@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 *{
-    font-family: "Red Hat Display", sans-serif;
+    font-family: "Red Hat Display", Arial ,sans-serif;
 }
