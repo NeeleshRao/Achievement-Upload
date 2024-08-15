@@ -1,15 +1,16 @@
-import React from 'react'
-import { useAuth } from '../../Context/AuthContext'
-import Navbar from '../../Components/Navbar';
+import React from "react";
+import { useAuth } from "../../Context/AuthContext";
+import VNavbar from "../../Components/VNavbar";
+import HNavbar from "../../Components/HNavbar";
 
 function Internship() {
-    const {logOut,user}=useAuth();
+  const { logOut, user } = useAuth();
   return (
     <>
-        <Navbar/>
-        HelloWorld
+      <HNavbar />
+      {/* <VNavbar /> */}
     </>
-  )
+  );
 }
 
-export default Internship
+export default Internship;

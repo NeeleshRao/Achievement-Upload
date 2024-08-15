@@ -7,7 +7,7 @@ function Navbar() {
   const [option,setOption]=useState("Internship")
   return (
     <>
-      <div className="flex overflow-hidden rounded-lg absolute bottom-1 top-10 border-black border-x-4">
+      <div className="flex overflow-hidden rounded-lg absolute bottom-1 top-20 border-black border-x-4">
         <div className="hidden md:flex md:flex-shrink-0">
           <div className="flex flex-col w-64">
             <div className="flex flex-col flex-grow pt-5 overflow-y-auto bg-white border-r border-gray-50">
