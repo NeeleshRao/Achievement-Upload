@@ -10,7 +10,7 @@ export default function Login() {
       await googleLogin();
       console.log("Success");
     } catch (err) {
-      console.log("hello", err);
+      console.log("Login Error", err);
     }
   };
 
