@@ -12,8 +12,6 @@ const firebaseConfig = {
     appId: env_var.VITE_REACT_APP_ID
 };
 
-console.log(env_var)
-
 const app = initializeApp(firebaseConfig);
 export const firestore = getFirestore(app);
 export const storage = getStorage(app);

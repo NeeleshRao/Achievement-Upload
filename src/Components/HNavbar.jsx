@@ -13,7 +13,7 @@ function HNavbar() {
 }
   return (
     <div>
-      <nav className="flex items-center m-5 shadow-2xl">
+      <nav className="flex items-center mt-5 pl-5 pr-5 shadow-md">
         <img src="/RVCE.jpeg" className="h-[70px] mr-10 mb-1 mt-1" />
         <h1 className="font-semibold text-[1.1rem]">R. V. College Of Engineering</h1>
 
