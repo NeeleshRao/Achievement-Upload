@@ -8,7 +8,7 @@ function Content() {
   return (
     <div className="w-full">
       <Bar handleOpenModel={setOpenModel} />
-      {openModel && <Outlay/>}
+      {openModel && <Outlay handleOpenModel={setOpenModel}/>}
     </div>
   )
 }

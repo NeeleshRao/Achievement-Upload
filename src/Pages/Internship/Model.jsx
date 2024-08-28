@@ -1,6 +1,8 @@
 import React from "react";
 
-function Model() {
+function Model({handleOpenModel}) {
+
+  const handleClose=()=>handleOpenModel(prev=>!prev)
   return (
     <div className="absolute bg-white z-20 rounded-lg  h-[85%] w-2/3 p-10 text-3xl">
       <h1>Add Internship</h1>
@@ -143,7 +145,7 @@ function Model() {
           </div>
         </div>
         <button
-          type="submit"
+          onClick={handleClose}
           className="border border-gray-500 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center m-4 ml-auto"
         >
           Cancel
