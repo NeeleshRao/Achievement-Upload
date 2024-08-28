@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 
 function Navbar({option}) {
   const { user, logOut } = useAuth();
-  // const [option,setOption]=useState("Internship")
   return (
     <>
     <div className="flex overflow-hidden bg-white">

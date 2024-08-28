@@ -53,14 +53,14 @@ function HNavbar() {
             role="menu"
             aria-orientation="vertical"
             aria-labelledby="menu-button"
-            tabindex="-1"
+            tabIndex="-1"
           >
             <div className="py-1" role="none">
               <a
                 href="#"
                 className="block px-4 py-2 text-sm font-semibold text-gray-700"
                 role="menuitem"
-                tabindex="-1"
+                tabIndex="-1"
                 id="menu-item-0"
               >
                 Profile
@@ -69,7 +69,7 @@ function HNavbar() {
                 onClick={handleLogout}
                 className="block w-full px-4 py-2 text-left text-sm text-gray-700"
                 role="menuitem"
-                tabindex="-1"
+                tabIndex="-1"
                 id="menu-item-3"
               >
                 Sign out

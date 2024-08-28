@@ -1,219 +1,160 @@
-import React, { useState } from "react";
+import React from "react";
 
 function Model() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedIndustry, setSelectedIndustry] = useState("");
-  const industryOptions = [
-    "Technology",
-    "Healthcare",
-    "Finance",
-    "Education",
-    "Retail",
-    "Manufacturing",
-    "Energy",
-    "Telecommunication",
-  ];
-
-  const toggleDropdown = () => {
-    setIsOpen(!isOpen);
-  };
-
-  const handleOptionClick = (option) => {
-    setSelectedIndustry(option);
-    setIsOpen(false);
-  };
-
-  const [typeisOpen, typesetIsOpen] = useState(false);
-  const [typeselectedType, typesetSelectedType] = useState("");
-  const internshipTypes = [
-    "Summer Intern",
-    "Associate",
-    "Part-time",
-    "Freelancing",
-    "Virtual Internship",
-    "Research Internship",
-  ];
-
-  const typetoggleDropdown = () => {
-    typesetIsOpen(!typeisOpen);
-  };
-
-  const typehandleOptionClick = (option) => {
-    typesetSelectedType(option);
-    typesetIsOpen(false);
-  };
-
   return (
-    <div className="p-5 h-2/3 w-2/3 rounded-2xl shadow-2xl bg-white border-black-800 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 overflow-scroll">
-      <div className=" flex flex-col pl-5 m-[15px]">
-        <div className="flex flex-row">
-          <h1 className="font-semibold text-xl">Add Internship</h1>
-        </div>
+    <div className="absolute bg-white z-20 rounded-lg  h-[85%] w-2/3 p-10 text-3xl">
+      <h1>Add Internship</h1>
 
-        <div className="flex flex-row gap-6 flex-wrap p-100">
-          <div className="flex flex-col">
-            <p className="text-left mt-4 mb-4">Designation</p>
+      <form className="relative grid-cols-2 mx-auto mt-3">
+        <div className="flex-wrap overflow-x-hidden overflow-scroll h-[50vh] mr-3">
+          {/* Lorem ipsum dolor sit, amet consectetur adipisicing elit. Deserunt nemo, possimus, doloremque reprehenderit cupiditate quae voluptatem, minima voluptates alias culpa provident? Porro beatae, atque ratione ipsam delectus, perferendis obcaecati optio velit odio culpa cum ipsa, esse id! Nisi ad in vero aliquid, obcaecati officiis alias fugiat! Fuga incidunt est quae, ducimus laboriosam molestias nemo! */}
+          <div className="relative z-0 w-full mb-5 group">
+            <input
+              type="text_designation"
+              name="floating_text_designation"
+              id="floating_text_designation"
+              className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              placeholder=" "
+              required
+            />
+            <label
+              htmlFor="floating_text_designation"
+              className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+            >
+              Designation
+            </label>
+          </div>
+          <div className="relative z-0 w-full mb-5 group">
             <input
               type="text"
-              placeholder="Enter Designation"
-              className="w-[630px] p-3 rounded-lg text-lg border-2 border-gray-300 cursor-pointer"
+              name="floating_organisation"
+              id="floating_organisation"
+              className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              placeholder=" "
+              required
             />
-            <p className="text-left mt-4 mb-4">Industry Sector</p>
-            <div className="relative w-full">
+            <label
+              htmlFor="floating_organisation"
+              className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+            >
+              Organisation
+            </label>
+          </div>
+          <div className="grid md:grid-cols-3 md:gap-6">
+            <div className="relative z-0 w-full mb-5 group">
+              <label
+                htmlFor="countries"
+                className="block mb-2 text-sm text-gray-900 dark:text-white"
+              >
+                Internship Type
+              </label>
+              <select
+                id="countries"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              >
+                <option>United States</option>
+                <option>Canada</option>
+                <option>France</option>
+                <option>Germany</option>
+              </select>
+            </div>
+
+            <div className="relative z-0 w-full mb-5 group">
+              <label
+                htmlFor="countries"
+                className="block mb-2 text-sm text-gray-900 dark:text-white"
+              >
+                From Date
+              </label>
+              <input
+                id="default-datepicker"
+                type="date"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="From date"
+              />
+            </div>
+
+            <div className="relative z-0 w-full mb-5 group">
+              <label
+                htmlFor="countries"
+                className="block mb-2 text-sm text-gray-900 dark:text-white"
+              >
+                To Date
+              </label>
+              <input
+                id="default-datepicker"
+                type="date"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="From date"
+              />
+            </div>
+          </div>
+
+          <div className="relative z-0 w-full mb-5 group">
+            <input
+              type="text"
+              name="repeat_industry"
+              id="floating_repeat_industry"
+              className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              placeholder=" "
+              required
+            />
+            <label
+              htmlFor="floating_repeat_industry"
+              className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+            >
+              Industry Sector
+            </label>
+          </div>
+          <div className="grid md:grid-cols-2 md:gap-6">
+            <div className="relative z-0 w-full mb-5 group">
+              <input
+                type="tel"
+                pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                name="floating_phone"
+                id="floating_phone"
+                className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                placeholder=" "
+                required
+              />
+              <label
+                htmlFor="floating_phone"
+                className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+              >
+                Phone number (123-456-7890)
+              </label>
+            </div>
+            <div className="relative z-0 w-full mb-5 group">
               <input
                 type="text"
-                value={selectedIndustry}
-                onClick={toggleDropdown}
-                placeholder="Select Industry"
-                readOnly
-                required
-                className="w-[630px] p-3 rounded-lg text-lg border-2 border-gray-300 cursor-pointer"
-              />
-              {isOpen && (
-                <ul className="list-none p-0 m-0 absolute top-full left-0 w-full border border-gray-300 rounded bg-white z-50">
-                  {industryOptions.map((option) => (
-                    <li
-                      key={option}
-                      onClick={() => handleOptionClick(option)}
-                      className="p-2 cursor-pointer hover:bg-gray-200"
-                    >
-                      {option}
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </div>
-          </div>
-
-          <div className="flex flex-col">
-            <p className="text-left mt-4 mb-4">
-              Organization<span className="text-red-500">*</span>
-            </p>
-            <input
-              type="text"
-              placeholder="Enter Organization"
-              className="w-[630px] p-3 rounded-lg text-lg border-2 border-gray-300 cursor-pointer"
-              required
-            />
-            <p className="text-left mt-4 mb-4">Stipend in INR</p>
-            <input
-              type="text"
-              placeholder="Stipend(in INR)"
-              className="w-[630px] p-3 rounded-lg text-lg border-2 border-gray-300 cursor-pointer"
-            />
-          </div>
-        </div>
-
-        <div className="flex flex-col mt-5">
-          <div className="flex gap-10 flex-wrap">
-            <div className="flex flex-col">
-              <p className="text-left mt-4 mb-4">
-                Internship Type<span className="text-red-500">*</span>
-              </p>
-              <div className="relative w-full">
-                <input
-                  type="text"
-                  value={typeselectedType}
-                  onClick={typetoggleDropdown}
-                  placeholder="Select Internship Type"
-                  readOnly
-                  required
-                  className="w-[400px] p-3 rounded-lg text-lg border-2 border-gray-300 cursor-pointer"
-                />
-                {isOpen && (
-                  <ul className="list-none p-0 m-0 absolute top-full left-0 w-full border border-gray-300 rounded bg-white z-50">
-                    {internshipTypes.map((option) => (
-                      <li
-                        key={option}
-                        onClick={() => typehandleOptionClick(option)}
-                        className="p-2 cursor-pointer hover:bg-gray-200"
-                      >
-                        {option}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-            </div>
-            <div className="flex flex-col">
-              <p className="text-left mt-4 mb-4">
-                From<span className="text-red-500">*</span>
-              </p>
-              <input
-                type="date"
-                id="Internstart"
-                name="InternStart"
-                placeholder="Start Date"
-                className="w-[400px] p-3 rounded-lg text-lg border-2 border-gray-300 cursor-pointer"
+                name="floating_company"
+                id="floating_company"
+                className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                placeholder=" "
                 required
               />
-            </div>
-            <div className="flex flex-col">
-              <p className="text-left mt-4 mb-4">To</p>
-              <input
-                type="date"
-                id="Internend"
-                name="Internend"
-                placeholder="End Date"
-                className="w-[400px] p-3 rounded-lg text-lg border-2 border-gray-300 cursor-pointer"
-              />
+              <label
+                htmlFor="floating_company"
+                className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+              >
+                Company (Ex. Google)
+              </label>
             </div>
           </div>
         </div>
-
-        <div className="flex gap-10 flex-wrap mt-5">
-          <div className="flex flex-col">
-            <p className="text-left mt-4 mb-4">
-              Country<span className="text-red-500">*</span>
-            </p>
-            <input
-              type="text"
-              placeholder="Enter Country"
-              className="w-[400px] p-3 rounded-lg text-lg border-2 border-gray-300 cursor-pointer"
-              required
-            />
-          </div>
-          <div className="flex flex-col">
-            <p className="text-left mt-4 mb-4">
-              City<span className="text-red-500">*</span>
-            </p>
-            <input
-              type="text"
-              placeholder="Enter City"
-              className="w-[400px] p-3 rounded-lg text-lg border-2 border-gray-300 cursor-pointer"
-              required
-            />
-          </div>
-          <div className="flex flex-col">
-            <p className="text-left mt-4 mb-4">
-              State<span className="text-red-500">*</span>
-            </p>
-            <input
-              type="text"
-              placeholder="Enter State"
-              className="w-[400px] p-3 rounded-lg text-lg border-2 border-gray-300 cursor-pointer"
-              required
-            />
-          </div>
-        </div>
-      </div>
-
-      <div className="flex flex-row-reverse mr-2.5 pr-5">
-        <form action="" method="post">
-          <button
-            type="submit"
-            className="rounded-lg bg-white text-black m-2.5 text-lg p-2.5 border-2 border-gray-300"
-          >
-            Cancel
-          </button>
-          <button
-            type="submit"
-            className="rounded-lg bg-white text-black m-2.5 text-lg p-2.5 border-2 border-gray-300"
-          >
-            Save
-          </button>
-        </form>
-      </div>
+        <button
+          type="submit"
+          className="border border-gray-500 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center m-4 ml-auto"
+        >
+          Cancel
+        </button>
+        <button
+          type="submit"
+          className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 m-4 ml-auto"
+        >
+          Submit
+        </button>
+      </form>
     </div>
   );
 }
