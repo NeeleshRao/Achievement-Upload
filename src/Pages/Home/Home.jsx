@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import { useRef } from "react";
-import { firestore } from "../../firebase";
+import { db } from "../../firebase";
 import { addDoc, collection } from "firebase/firestore";
 import { useAuth } from "../../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 function Home() {
   const messageRef = useRef();
-  const ref = collection(firestore, "messages");
+  const ref = collection(db, "messages");
   const navigate=useNavigate();
   const {logOut,user}=useAuth();
 

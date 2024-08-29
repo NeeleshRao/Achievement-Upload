@@ -1,0 +1,221 @@
+import React, { useState } from "react";
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "../../firebase";
+import { useAuth } from "../../Context/AuthContext";
+
+function Model({ handleOpenModel }) {
+  const {user} = useAuth();
+  const [formData, setFormData] = useState({
+    designation: "",
+    organisation: "",
+    internshipType: "",
+    fromDate: "",
+    toDate: "",
+    industry: "",
+    phone: "",
+    company: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!user) {
+      alert("You must be logged in to submit the form.");
+      return;
+    }
+
+    try {
+      const docRef = doc(db, "internship", user.uid);
+      await setDoc(doc(docRef, "internships", formData.designation), formData);
+      alert("Internship added successfully!");
+      handleOpenModel((prev) => !prev);
+    } catch (err) {
+      console.error("Error adding document: ", err);
+      alert("Failed to add internship. Please try again.");
+    }
+  };
+
+  const handleClose = () => handleOpenModel((prev) => !prev);
+
+  return (
+    <div className="absolute bg-white z-20 rounded-lg  h-[85%] w-2/3 p-10 text-3xl">
+      <h1>Add Internship</h1>
+      <form onSubmit={handleSubmit} className="relative grid-cols-2 mx-auto mt-3">
+        <div className="flex-wrap overflow-x-hidden overflow-scroll h-[50vh] mr-3">
+          <div className="relative z-0 w-full mb-5 mt-1 group">
+            <input
+              type="text"
+              name="designation"
+              id="floating_text_designation"
+              className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              placeholder=" "
+              required
+              value={formData.designation}
+              onChange={handleChange}
+            />
+            <label
+              htmlFor="floating_text_designation"
+              className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+            >
+              Designation
+            </label>
+          </div>
+          <div className="relative z-0 w-full mb-5 group">
+            <input
+              type="text"
+              name="organisation"
+              id="floating_organisation"
+              className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              placeholder=" "
+              required
+              value={formData.organisation}
+              onChange={handleChange}
+            />
+            <label
+              htmlFor="floating_organisation"
+              className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+            >
+              Organisation
+            </label>
+          </div>
+          <div className="grid md:grid-cols-3 md:gap-6">
+            <div className="relative z-0 w-full mb-5 group">
+              <label
+                htmlFor="internshipType"
+                className="block mb-2 text-sm text-gray-900 dark:text-white"
+              >
+                Internship Type
+              </label>
+              <select
+                id="internshipType"
+                name="internshipType"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                value={formData.internshipType}
+                onChange={handleChange}
+              >
+                <option value="" disabled>
+                  Select Internship Type
+                </option>
+                <option value="Full-Time">Full-Time</option>
+                <option value="Part-Time">Part-Time</option>
+                <option value="Remote">Remote</option>
+              </select>
+            </div>
+
+            <div className="relative z-0 w-full mb-5 group">
+              <label
+                htmlFor="fromDate"
+                className="block mb-2 text-sm text-gray-900 dark:text-white"
+              >
+                From Date
+              </label>
+              <input
+                id="fromDate"
+                name="fromDate"
+                type="date"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="From date"
+                value={formData.fromDate}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="relative z-0 w-full mb-5 group">
+              <label
+                htmlFor="toDate"
+                className="block mb-2 text-sm text-gray-900 dark:text-white"
+              >
+                To Date
+              </label>
+              <input
+                id="toDate"
+                name="toDate"
+                type="date"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="To date"
+                value={formData.toDate}
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+
+          <div className="relative z-0 w-full mb-5 group">
+            <input
+              type="text"
+              name="industry"
+              id="floating_repeat_industry"
+              className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              placeholder=" "
+              required
+              value={formData.industry}
+              onChange={handleChange}
+            />
+            <label
+              htmlFor="floating_repeat_industry"
+              className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+            >
+              Industry Sector
+            </label>
+          </div>
+
+          <div className="relative z-0 w-full mb-5 group">
+            <input
+              type="text"
+              name="phone"
+              id="floating_phone"
+              className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              placeholder=" "
+              required
+              value={formData.phone}
+              onChange={handleChange}
+            />
+            <label
+              htmlFor="floating_phone"
+              className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+            >
+              Contact Phone Number
+            </label>
+          </div>
+
+          <div className="relative z-0 w-full mb-5 group">
+            <input
+              type="text"
+              name="company"
+              id="floating_company"
+              className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              placeholder=" "
+              required
+              value={formData.company}
+              onChange={handleChange}
+            />
+            <label
+              htmlFor="floating_company"
+              className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+            >
+              Company Name
+            </label>
+          </div>
+        </div>
+        <button type="submit" className="px-5 py-2 bg-blue-600 text-white rounded-lg">
+          Submit
+        </button>
+      </form>
+      <button
+        onClick={handleClose}
+        className="absolute top-2 right-2 text-2xl text-gray-500 hover:text-gray-700"
+      >
+        &times;
+      </button>
+    </div>
+  );
+}
+
+export default Model;

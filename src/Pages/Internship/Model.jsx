@@ -1,22 +1,75 @@
-import React from "react";
+import React, { useState } from "react";
+import { useAuth } from "../../Context/AuthContext";
+import { db } from "../../firebase";
+import { addDoc, doc, collection } from "firebase/firestore";
 
-function Model({handleOpenModel}) {
+function Model({ handleOpenModel }) {
+  const { user } = useAuth();
+  const [formData, setFormData] = useState({
+    designation: "",
+    organisation: "",
+    internshipType: "",
+    fromDate: "",
+    toDate: "",
+    industry: "",
+    phone: "",
+    company: "",
+  });
 
-  const handleClose=()=>handleOpenModel(prev=>!prev)
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    // console.log(name, value);
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!user) {
+      console.log(user);
+      alert("You must be logged in to submit the form.");
+      return;
+    }
+
+    try {
+      // Create a reference to the user's document in the "internship" collection
+      const userDocRef = doc(db, "internship", user.uid);
+      // Create a subcollection for the internships under the user's document
+      const internshipsCollectionRef = collection(userDocRef, "internships");
+      // Add a new document to the "internships" subcollection with the formData
+      await addDoc(internshipsCollectionRef, formData);
+      console.log(formData);
+      alert("Internship added successfully!");
+      handleOpenModel((prev) => !prev);
+    } catch (err) {
+      console.error("Error adding document: ", err);
+      alert("Failed to add internship. Please try again.");
+    }
+  };
+
+  const handleClose = () => handleOpenModel((prev) => !prev);
   return (
     <div className="absolute bg-white z-20 rounded-lg  h-[85%] w-2/3 p-10 text-3xl">
       <h1>Add Internship</h1>
 
-      <form className="relative grid-cols-2 mx-auto mt-3">
+      <form
+        onSubmit={handleSubmit}
+        className="relative grid-cols-2 mx-auto mt-3"
+      >
         <div className="flex-wrap overflow-x-hidden overflow-scroll h-[50vh] mr-3">
           {/* Lorem ipsum dolor sit, amet consectetur adipisicing elit. Deserunt nemo, possimus, doloremque reprehenderit cupiditate quae voluptatem, minima voluptates alias culpa provident? Porro beatae, atque ratione ipsam delectus, perferendis obcaecati optio velit odio culpa cum ipsa, esse id! Nisi ad in vero aliquid, obcaecati officiis alias fugiat! Fuga incidunt est quae, ducimus laboriosam molestias nemo! */}
-          <div className="relative z-0 w-full mb-5 group">
+          <div className="relative z-0 w-full mb-5 mt-2 group">
             <input
               type="text_designation"
-              name="floating_text_designation"
-              id="floating_text_designation"
+              name="designation"
+              id="designation"
+              // autoComplete="off"
               className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               placeholder=" "
+              value={formData.designation}
+              onChange={handleChange}
               required
             />
             <label
@@ -29,10 +82,13 @@ function Model({handleOpenModel}) {
           <div className="relative z-0 w-full mb-5 group">
             <input
               type="text"
-              name="floating_organisation"
-              id="floating_organisation"
+              name="organisation"
+              id="organisation"
+              // autoComplete="off"
               className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               placeholder=" "
+              value={formData.organisation}
+              onChange={handleChange}
               required
             />
             <label
@@ -52,6 +108,10 @@ function Model({handleOpenModel}) {
               </label>
               <select
                 id="countries"
+                // autoComplete="off"
+                name="internshipType"
+                value={formData.internshipType}
+                onChange={handleChange}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               >
                 <option>United States</option>
@@ -70,7 +130,11 @@ function Model({handleOpenModel}) {
               </label>
               <input
                 id="default-datepicker"
+                // autoComplete="off"
                 type="date"
+                name="fromDate"
+                value={formData.fromDate}
+                onChange={handleChange}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="From date"
               />
@@ -86,6 +150,10 @@ function Model({handleOpenModel}) {
               <input
                 id="default-datepicker"
                 type="date"
+                // autoComplete="off"
+                name="toDate"
+                value={formData.toDate}
+                onChange={handleChange}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="From date"
               />
@@ -95,10 +163,13 @@ function Model({handleOpenModel}) {
           <div className="relative z-0 w-full mb-5 group">
             <input
               type="text"
-              name="repeat_industry"
-              id="floating_repeat_industry"
+              name="industry"
+              id="industry"
+              // autoComplete="off"
               className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               placeholder=" "
+              value={formData.industry}
+              onChange={handleChange}
               required
             />
             <label
@@ -112,27 +183,33 @@ function Model({handleOpenModel}) {
             <div className="relative z-0 w-full mb-5 group">
               <input
                 type="tel"
-                pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-                name="floating_phone"
-                id="floating_phone"
+                pattern="[0-9]{10}"
+                name="phone"
+                id="phone"
+                // autoComplete="off"
                 className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                 placeholder=" "
+                value={formData.phone}
+                onChange={handleChange}
                 required
               />
               <label
                 htmlFor="floating_phone"
                 className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
               >
-                Phone number (123-456-7890)
+                Phone number
               </label>
             </div>
             <div className="relative z-0 w-full mb-5 group">
               <input
                 type="text"
-                name="floating_company"
-                id="floating_company"
+                name="company"
+                id="company"
+                // autoComplete="off"
                 className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                 placeholder=" "
+                value={formData.company}
+                onChange={handleChange}
                 required
               />
               <label
