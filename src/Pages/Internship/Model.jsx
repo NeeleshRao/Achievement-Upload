@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { useAuth } from "../../Context/AuthContext";
 import { db } from "../../firebase";
 import { addDoc, doc, collection } from "firebase/firestore";
+import { useIntern } from "../../Context/InternContext";
 
-function Model({ handleOpenModel }) {
+function Model() {
+  const { setOpenModel, setInterns } = useIntern();
   const { user } = useAuth();
   const [formData, setFormData] = useState({
     designation: "",
@@ -39,19 +41,28 @@ function Model({ handleOpenModel }) {
       // Create a subcollection for the internships under the user's document
       const internshipsCollectionRef = collection(userDocRef, "internships");
       // Add a new document to the "internships" subcollection with the formData
-      await addDoc(internshipsCollectionRef, formData);
+      const newDocRef = await addDoc(internshipsCollectionRef, formData);
+
+      // Update the local interns state with the new internship data
+      setInterns((prevInterns) => [
+        ...prevInterns,
+        { id: newDocRef.id, ...formData },
+      ]);
+
       console.log(formData);
       alert("Internship added successfully!");
-      handleOpenModel((prev) => !prev);
+
+      // Close the modal after successful submission
+      setOpenModel((prev) => !prev);
     } catch (err) {
       console.error("Error adding document: ", err);
       alert("Failed to add internship. Please try again.");
     }
   };
 
-  const handleClose = () => handleOpenModel((prev) => !prev);
+  const handleClose = () => setOpenModel((prev) => !prev);
   return (
-    <div className="absolute bg-white z-20 rounded-lg  h-[85%] w-2/3 p-10 text-3xl">
+    <div className="absolute bg-white z-20 rounded-lg  h-[85%] w-2/3 p-10 text-3xl top-0">
       <h1>Add Internship</h1>
 
       <form

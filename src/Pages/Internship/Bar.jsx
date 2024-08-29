@@ -1,9 +1,11 @@
 import React from "react";
+import { useIntern } from "../../Context/InternContext";
 
-function Bar({handleOpenModel}) {
-  const handleAdd = () => {handleOpenModel((prev)=>!prev)};
+function Bar() {
+  const {setOpenModel}=useIntern();
+  const handleAdd = () => {setOpenModel((prev)=>!prev)};
   return (
-    <div className="flex w-full justify-center items-center">
+    <div className="flex w-full justify-center items-center pl-4">
       <div className="text-2xl p-2">Internship</div>
       <button
         onClick={handleAdd}
