@@ -1,12 +1,10 @@
 import React from "react";
-import { useAuth } from "../../Context/AuthContext";
 import VNavbar from "../../Components/VNavbar";
 import HNavbar from "../../Components/HNavbar";
 import Content from "./Content";
 import { InternProvider } from "../../Context/InternContext";
 
 function Internship() {
-  const { logOut, user } = useAuth();
   return (
     <>
       <HNavbar />

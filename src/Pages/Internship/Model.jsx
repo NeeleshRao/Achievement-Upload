@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useAuth } from "../../Context/AuthContext";
 import { db } from "../../firebase";
-import { addDoc, doc, collection } from "firebase/firestore";
+import { ref, push, set } from "firebase/database";
 import { useIntern } from "../../Context/InternContext";
 
 function Model() {
@@ -26,27 +26,29 @@ function Model() {
       [name]: value,
     }));
   };
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!user) {
-      console.log(user);
       alert("You must be logged in to submit the form.");
       return;
     }
 
     try {
-      // Create a reference to the user's document in the "internship" collection
-      const userDocRef = doc(db, "internship", user.uid);
-      // Create a subcollection for the internships under the user's document
-      const internshipsCollectionRef = collection(userDocRef, "internships");
-      // Add a new document to the "internships" subcollection with the formData
-      const newDocRef = await addDoc(internshipsCollectionRef, formData);
+      // Create a reference to the user's internships node
+      const internshipsRef = ref(db, `students/${user.uid}/internships`);
+      
+      // Add a new entry to the internships node
+      const newInternshipRef = push(internshipsRef); // Push a new unique key
+      
+      // Set the new internship data at the new reference
+      await set(newInternshipRef, formData);
 
       // Update the local interns state with the new internship data
       setInterns((prevInterns) => [
         ...prevInterns,
-        { id: newDocRef.id, ...formData },
+        { id: newInternshipRef.key, ...formData },
       ]);
 
       console.log(formData);

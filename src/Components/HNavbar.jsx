@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../Context/AuthContext";
+import { Link } from "react-router-dom";
 
 function HNavbar() {
   const { user, logOut } = useAuth();
@@ -28,11 +29,11 @@ function HNavbar() {
             >
               {user.photoURL && (
                 <img
-                  src={user?.photoURL}
+                  src={user.photoURL}
                   className="w-8 rounded-full ml-auto outline-none focus:outline-none"
                 ></img>
               )}
-              <h1 className="mt-auto mb-auto text-[1.1rem]">{user?.displayName}</h1>
+              <h1 className="mt-auto mb-auto text-[1.1rem]">{user.displayName}</h1>
 
               <svg
                 className="-mr-1 h-5 w-5 text-gray-400 mt-auto mb-auto"
@@ -56,15 +57,15 @@ function HNavbar() {
             tabIndex="-1"
           >
             <div className="py-1" role="none">
-              <a
-                href="#"
+              <Link
+                to={"/profile"}
                 className="block px-4 py-2 text-sm font-semibold text-gray-700"
                 role="menuitem"
                 tabIndex="-1"
                 id="menu-item-0"
               >
                 Profile
-              </a>
+              </Link>
               <button
                 onClick={handleLogout}
                 className="block w-full px-4 py-2 text-left text-sm text-gray-700"

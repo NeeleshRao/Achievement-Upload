@@ -7,6 +7,7 @@ import Internship from "./Pages/Internship/Internship";
 import Project from "./Pages/Project/Project";
 import Publication from "./Pages/Publication/Publication";
 import Sports from "./Pages/Sports/Sports";
+import Profile from "./Pages/Profile/Profile";
 
 function App() {
   return (
@@ -18,6 +19,14 @@ function App() {
           element={
             <Protected>
               <Home />
+            </Protected>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <Protected>
+              <Profile />
             </Protected>
           }
         />
