@@ -2,7 +2,7 @@ import React from "react";
 import HNavbar from "../../Components/HNavbar";
 import VNavbar from "../../Components/VNavbar";
 import Content from "./Content";
-import AllInternships from "./AllInternships";
+import ShowAllInternships from "./ShowAllInternships";
 
 function Profile() {
   return (
@@ -12,7 +12,7 @@ function Profile() {
         <VNavbar />
         <Content />
       </div> */}
-      <AllInternships/>
+      <ShowAllInternships/>
     </>
   );
 }
