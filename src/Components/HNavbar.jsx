@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../Context/AuthContext";
+import { Link } from "react-router-dom";
 
 function HNavbar() {
   const { user, logOut } = useAuth();
@@ -56,15 +57,15 @@ function HNavbar() {
             tabIndex="-1"
           >
             <div className="py-1" role="none">
-              <a
-                href="#"
+              <Link
+                to={'/profile'}
                 className="block px-4 py-2 text-sm font-semibold text-gray-700"
                 role="menuitem"
                 tabIndex="-1"
                 id="menu-item-0"
               >
                 Profile
-              </a>
+              </Link>
               <button
                 onClick={handleLogout}
                 className="block w-full px-4 py-2 text-left text-sm text-gray-700"
