@@ -259,21 +259,18 @@ function Model() {
           </div>
         </div>
 
-        <div className="flex gap-4 mt-3">
-          <button
-            type="submit"
-            className="px-4 py-2 text-white bg-blue-600 rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >
-            Add
-          </button>
-          <button
-            type="button"
-            onClick={handleClose}
-            className="px-4 py-2 text-white bg-red-600 rounded-lg shadow-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500"
-          >
-            Close
-          </button>
-        </div>
+        <button
+          onClick={handleClose}
+          className="border border-gray-500 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center m-4 ml-auto"
+        >
+          Cancel
+        </button>
+        <button
+          type="submit"
+          className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 m-4 ml-auto"
+        >
+          Submit
+        </button>
       </form>
     </div>
   );

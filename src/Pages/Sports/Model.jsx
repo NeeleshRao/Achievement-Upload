@@ -146,7 +146,7 @@ function Model() {
           
           <div className="grid md:grid-cols-3 md:gap-6">
 
-            <div className="relative z-0 w-full mb-5 group">
+            <div className="relative z-0 w-full group mt-auto mb-auto">
             <input
               type="text"
               name="CoachName"
@@ -184,7 +184,7 @@ function Model() {
             </div>
 
 
-            <div className="relative z-0 w-full mb-5 group">
+            <div className="relative z-0 w-full mt-auto mb-auto group">
             <input
               type="text"
               name="Location"
@@ -272,7 +272,7 @@ function Model() {
               id="certificate"
               accept=".pdf,.png"
               onChange={handleFileChange}
-              className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+              className="block w-full text-sm text-gray-900 border border-gray-300  cursor-pointer bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
             />
           </div>
 
