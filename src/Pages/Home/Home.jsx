@@ -1,23 +1,24 @@
 import { useEffect, useState } from "react";
 import { useRef } from "react";
-import { firestore } from "../../firebase";
-import { addDoc, collection, query, where, getDocs } from "firebase/firestore";
-import { useAuth } from "../../context/AuthContext";
+
+
 import { useNavigate } from "react-router-dom";
 import SubmitUsn from "./SubmitUsn";
 
 function Home() {
+
   const usnRef = useRef();
   const [usnStatus, setUsnStatus] = useState(false);
   const ref = collection(firestore, "usnmapping");
   const navigate = useNavigate();
   const { logOut, user } = useAuth();
 
-  // useEffect(()=>{
-  //   console.log("user",user)
-  //   if(user)
-  //     navigate('/')
-  // },[user])
+
+  useEffect(()=>{
+    console.log("user",user)
+    // if(user)
+    //   navigate('/')
+  },[user])
 
   const handleLogout = async () => {
     try {
@@ -45,6 +46,7 @@ function Home() {
   return (
     <div>
       <h1>{user?.displayName}</h1>
+
 
       <button onClick={handleLogout}>Logout</button>
       <SubmitUsn usnStatus={usnStatus} />
