@@ -1,15 +1,18 @@
-import React, { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRef } from "react";
-import { db } from "../../firebase";
-import { addDoc, collection } from "firebase/firestore";
-import { useAuth } from "../../Context/AuthContext";
+
+
 import { useNavigate } from "react-router-dom";
+import SubmitUsn from "./SubmitUsn";
 
 function Home() {
-  const messageRef = useRef();
-  const ref = collection(db, "messages");
-  const navigate=useNavigate();
-  const {logOut,user}=useAuth();
+
+  const usnRef = useRef();
+  const [usnStatus, setUsnStatus] = useState(false);
+  const ref = collection(firestore, "usnmapping");
+  const navigate = useNavigate();
+  const { logOut, user } = useAuth();
+
 
   useEffect(()=>{
     console.log("user",user)
@@ -17,37 +20,36 @@ function Home() {
     //   navigate('/')
   },[user])
 
-  const handleSave = async (e) => {
-    e.preventDefault();
-    console.log(messageRef.current.value);
-
-    let data = {
-      message: messageRef.current.value,
-    };
-
+  const handleLogout = async () => {
     try {
-      addDoc(ref, data);
-    } catch (error) {
-      console.log(error);
+      await logOut();
+    } catch (err) {
+      console.log(err);
     }
   };
-  const handleLogout=async()=>{
-      try{
-        await logOut();
-      }catch(err){
-        console.log(err)
+
+  useEffect(() => {
+    const onPageReload = async () => {
+      const q = query(ref, where("user_id", "==", user.uid));
+
+      const querySnapshot = await getDocs(q);
+      console.log(querySnapshot.size);
+      if (querySnapshot.size == 0) {
+        setUsnStatus(false);
+      } else {
+        setUsnStatus(true);
       }
-  }
+    };
+    onPageReload();
+  });
+
   return (
     <div>
       <h1>{user?.displayName}</h1>
-      {user.photoURL && <img src={user?.photoURL} className="w-10 rounded-full"></img>}
-      <form onSubmit={handleSave}>
-        <label>Enter Message</label>
-        <input type="text" ref={messageRef} />
-        <button type="submit">Save</button>
-      </form>
+
+
       <button onClick={handleLogout}>Logout</button>
+      <SubmitUsn usnStatus={usnStatus} />
     </div>
   );
 }
